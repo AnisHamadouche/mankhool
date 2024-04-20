@@ -1,0 +1,70 @@
+<!-- templates/page_viewer.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ book_data.title }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    .text-content p {
+	white-space: pre-wrap; /* Ensures that whitespace and newlines are preserved */
+    }
+    .rtl {
+	direction: rtl; /* Right to left */
+	text-align: right; /* Align text to the right */
+    }
+    .ltr {
+	direction: ltr; /* Left to right */
+	text-align: left; /* Align text to the left */
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>{{ book_data.title }}</h1>
+    <h2>{{ book_data.author }}</h2>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h3>Chapters</h3>
+            <ul class="nav flex-column">
+            {% for chapter in book_data.chapters %}
+                <li class="nav-item">
+                    <a href="?chapter={{ loop.index0 }}&page=0" class="nav-link">{{ chapter.chapterTitle or 'Chapter ' + loop.index|string }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+		<div class="col-md-9 text-content ltr" id="textContent">
+		    <p>{{ page_data.text }}</p>
+		    <hr>
+			<nav>
+			    {% if previous_page is not none and previous_chapter is not none %}
+			    <a href="?chapter={{ previous_chapter }}&page={{ previous_page }}" class="btn btn-primary">&laquo; Previous</a>
+			    {% endif %}
+			    {% if next_page is not none and next_chapter is not none %}
+			    <a href="?chapter={{ next_chapter }}&page={{ next_page }}" class="btn btn-primary">Next &raquo;</a>
+			    {% endif %}
+			</nav>
+		</div>
+    </div>
+</div>
+<script>
+    function toggleTextDirection() {
+        var content = document.getElementById('textContent');
+        if (content) {
+            if (content.classList.contains('ltr')) {
+                content.classList.remove('ltr');
+                content.classList.add('rtl');
+            } else {
+                content.classList.remove('rtl');
+                content.classList.add('ltr');
+            }
+        } else {
+            console.error('textContent element not found');
+        }
+    }
+</script>
+</body>
+</html>
+

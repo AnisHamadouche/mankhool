@@ -1,1 +1,51 @@
+<!-- templates/homepage.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Books</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>All Books</h1>
+    <form action="/" method="get">
+        <input type="text" name="query" placeholder="Search for books..." aria-label="Search">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    <ul>
+        {% for book in books %}
+        <li>
+            <a href="/books/{{ book.id }}/">{{ book.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <!-- Search results section -->
+    <!-- {% if search_results %}
+    <h2>Search Results</h2>
+    <ul>
+        {% for result in search_results %}
+        <li>
+            <a href="/books/{{ result.id }}/">{{ result.title }} - {{ result.chapter }}</a>
+            <p>{{ result.text_preview }}...</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %} -->
+<!-- Display the search results -->
+    {% if search_results %}
+    <h2>Search Results</h2>
+    <ul>
+        {% for result in search_results %}
+        <li>
+            <a href="/books/{{ result._id }}/">{{ result._source.title }}</a>
+            <!-- You might need to adjust this according to your book data structure -->
+            <p>Score: {{ result._score }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+</body>
+</html>
 
