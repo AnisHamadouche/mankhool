@@ -20,12 +20,9 @@ Follow these steps to get your development environment running:
 Start by cloning the repository to your local machine. To do this, run the following command in your terminal:
 
 ```bash
-git clone <repository-url>
-cd Mankhool
+git clone git@github.com:AnisHamadouche/mankhool.git
+cd mankhool
 ```
-
-Replace `<repository-url>` with the URL of the repository.
-
 ### 2. Set Up a Python Virtual Environment
 
 It's recommended to use a virtual environment to manage dependencies for your project. Create and activate a virtual environment by running:
